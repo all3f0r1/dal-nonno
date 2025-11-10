@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { APP_LOGO } from "@/const";
-import { Coffee, MapPin, Phone, Clock, Instagram, Facebook } from "lucide-react";
+import { Coffee, MapPin, Phone, Clock, Instagram, Facebook, UtensilsCrossed } from "lucide-react";
 
 export default function Home() {
   return (
@@ -16,6 +16,7 @@ export default function Home() {
             <a href="#accueil" className="text-sm font-medium hover:text-primary transition-colors">Accueil</a>
             <a href="#a-propos" className="text-sm font-medium hover:text-primary transition-colors">À propos</a>
             <a href="#specialites" className="text-sm font-medium hover:text-primary transition-colors">Nos spécialités</a>
+            <a href="#menu" className="text-sm font-medium hover:text-primary transition-colors">Menu & Prix</a>
             <a href="#galerie" className="text-sm font-medium hover:text-primary transition-colors">Galerie</a>
             <a href="#contact" className="text-sm font-medium hover:text-primary transition-colors">Contact</a>
           </div>
@@ -30,7 +31,7 @@ export default function Home() {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ 
-            backgroundImage: 'url(/hero-bg.jpg)',
+            backgroundImage: 'url(/dal-nonno-vitrine.jpeg)',
             filter: 'brightness(0.4)'
           }}
         />
@@ -42,7 +43,7 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" asChild className="bg-primary hover:bg-primary/90">
-              <a href="#specialites">Découvrir nos spécialités</a>
+              <a href="#menu">Découvrir notre menu</a>
             </Button>
             <Button size="lg" variant="outline" asChild className="bg-white/10 backdrop-blur-sm border-white text-white hover:bg-white/20">
               <a href="#contact">Nous trouver</a>
@@ -69,7 +70,7 @@ export default function Home() {
             </div>
             <div className="relative h-96 rounded-lg overflow-hidden shadow-2xl">
               <img 
-                src="/cafe-ambiance.jpg" 
+                src="/dal-nonno-interieur.jpeg" 
                 alt="Ambiance Dal Nonno" 
                 className="w-full h-full object-cover"
               />
@@ -92,7 +93,7 @@ export default function Home() {
             <Card className="overflow-hidden hover:shadow-xl transition-shadow">
               <div className="h-64 overflow-hidden">
                 <img 
-                  src="/coffee-specialty.jpg" 
+                  src="/dal-nonno-latte-pistache.jpeg" 
                   alt="Café italien" 
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                 />
@@ -111,7 +112,7 @@ export default function Home() {
             <Card className="overflow-hidden hover:shadow-xl transition-shadow">
               <div className="h-64 overflow-hidden">
                 <img 
-                  src="/pastries.jpg" 
+                  src="/dal-nonno-vitrine.jpeg" 
                   alt="Pâtisseries italiennes" 
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                 />
@@ -127,7 +128,7 @@ export default function Home() {
             <Card className="overflow-hidden hover:shadow-xl transition-shadow">
               <div className="h-64 overflow-hidden">
                 <img 
-                  src="/pastries.jpg" 
+                  src="/dal-nonno-affogato.jpeg" 
                   alt="Cannoli et pâtisseries" 
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                 />
@@ -135,7 +136,7 @@ export default function Home() {
               <CardContent className="p-6">
                 <h3 className="text-xl font-bold mb-3 text-card-foreground">Pâtisseries Maison</h3>
                 <p className="text-muted-foreground">
-                  Cannoli siciliens à la crème de pistache, paninis garnis et autres douceurs italiennes préparées quotidiennement avec des ingrédients de qualité.
+                  Cannoli siciliens à la crème de pistache, affogato maison et autres douceurs italiennes préparées quotidiennement avec des ingrédients de qualité.
                 </p>
               </CardContent>
             </Card>
@@ -143,8 +144,178 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Menu & Prix */}
+      <section id="menu" className="py-20 bg-card">
+        <div className="container">
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <UtensilsCrossed className="h-10 w-10 text-primary" />
+              <h2 className="text-4xl font-bold text-primary">Notre Menu</h2>
+            </div>
+            <p className="text-lg text-muted-foreground">
+              Des saveurs authentiques à prix doux
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {/* Boissons Chaudes */}
+            <Card className="p-6">
+              <h3 className="text-2xl font-bold mb-6 text-primary border-b-2 border-primary pb-2">☕ Boissons Chaudes</h3>
+              <div className="space-y-4">
+                <div className="flex justify-between items-center">
+                  <div>
+                    <p className="font-semibold text-card-foreground">Espresso</p>
+                    <p className="text-sm text-muted-foreground">Café italien traditionnel</p>
+                  </div>
+                  <span className="text-primary font-bold">2,50€</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <p className="font-semibold text-card-foreground">Cappuccino</p>
+                    <p className="text-sm text-muted-foreground">Espresso, lait mousseux</p>
+                  </div>
+                  <span className="text-primary font-bold">3,50€</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <p className="font-semibold text-card-foreground">Latte Macchiato</p>
+                    <p className="text-sm text-muted-foreground">Lait, espresso, mousse</p>
+                  </div>
+                  <span className="text-primary font-bold">4,00€</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <p className="font-semibold text-card-foreground">Latte Pistache</p>
+                    <p className="text-sm text-muted-foreground">Notre spécialité maison</p>
+                  </div>
+                  <span className="text-primary font-bold">4,50€</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <p className="font-semibold text-card-foreground">Affogato</p>
+                    <p className="text-sm text-muted-foreground">Glace vanille, espresso chaud</p>
+                  </div>
+                  <span className="text-primary font-bold">5,00€</span>
+                </div>
+              </div>
+            </Card>
+
+            {/* Snacks Salés */}
+            <Card className="p-6">
+              <h3 className="text-2xl font-bold mb-6 text-primary border-b-2 border-primary pb-2">🍕 Snacks Salés</h3>
+              <div className="space-y-4">
+                <div className="flex justify-between items-center">
+                  <div>
+                    <p className="font-semibold text-card-foreground">Arancini</p>
+                    <p className="text-sm text-muted-foreground">Boulettes de riz frites (2 pcs)</p>
+                  </div>
+                  <span className="text-primary font-bold">5,50€</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <p className="font-semibold text-card-foreground">Focaccia Nature</p>
+                    <p className="text-sm text-muted-foreground">Pain italien moelleux</p>
+                  </div>
+                  <span className="text-primary font-bold">4,00€</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <p className="font-semibold text-card-foreground">Focaccia Garnie</p>
+                    <p className="text-sm text-muted-foreground">Tomates, romarin, huile d'olive</p>
+                  </div>
+                  <span className="text-primary font-bold">5,50€</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <p className="font-semibold text-card-foreground">Panini</p>
+                    <p className="text-sm text-muted-foreground">Garniture au choix</p>
+                  </div>
+                  <span className="text-primary font-bold">6,50€</span>
+                </div>
+              </div>
+            </Card>
+
+            {/* Pâtisseries */}
+            <Card className="p-6">
+              <h3 className="text-2xl font-bold mb-6 text-primary border-b-2 border-primary pb-2">🍰 Pâtisseries</h3>
+              <div className="space-y-4">
+                <div className="flex justify-between items-center">
+                  <div>
+                    <p className="font-semibold text-card-foreground">Cannoli Sicilien</p>
+                    <p className="text-sm text-muted-foreground">Crème de pistache maison</p>
+                  </div>
+                  <span className="text-primary font-bold">4,50€</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <p className="font-semibold text-card-foreground">Tiramisu</p>
+                    <p className="text-sm text-muted-foreground">Recette traditionnelle</p>
+                  </div>
+                  <span className="text-primary font-bold">5,00€</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <p className="font-semibold text-card-foreground">Panna Cotta</p>
+                    <p className="text-sm text-muted-foreground">Coulis de fruits rouges</p>
+                  </div>
+                  <span className="text-primary font-bold">4,50€</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <p className="font-semibold text-card-foreground">Biscotti</p>
+                    <p className="text-sm text-muted-foreground">Assortiment (3 pcs)</p>
+                  </div>
+                  <span className="text-primary font-bold">3,50€</span>
+                </div>
+              </div>
+            </Card>
+
+            {/* Boissons Fraîches */}
+            <Card className="p-6">
+              <h3 className="text-2xl font-bold mb-6 text-primary border-b-2 border-primary pb-2">🥤 Boissons Fraîches</h3>
+              <div className="space-y-4">
+                <div className="flex justify-between items-center">
+                  <div>
+                    <p className="font-semibold text-card-foreground">Jus d'Orange Frais</p>
+                    <p className="text-sm text-muted-foreground">Pressé minute</p>
+                  </div>
+                  <span className="text-primary font-bold">4,00€</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <p className="font-semibold text-card-foreground">Limonade Maison</p>
+                    <p className="text-sm text-muted-foreground">Citron frais, menthe</p>
+                  </div>
+                  <span className="text-primary font-bold">3,50€</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <p className="font-semibold text-card-foreground">Thé Glacé</p>
+                    <p className="text-sm text-muted-foreground">Pêche ou citron</p>
+                  </div>
+                  <span className="text-primary font-bold">3,00€</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <p className="font-semibold text-card-foreground">Eau Minérale</p>
+                    <p className="text-sm text-muted-foreground">Plate ou pétillante</p>
+                  </div>
+                  <span className="text-primary font-bold">2,50€</span>
+                </div>
+              </div>
+            </Card>
+          </div>
+
+          <div className="text-center mt-8">
+            <p className="text-muted-foreground italic">
+              💰 Prix moyens : €1-10 par personne • Sur place ou à emporter
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Galerie */}
-      <section id="galerie" className="py-20 bg-card">
+      <section id="galerie" className="py-20 bg-background">
         <div className="container">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4 text-primary">Notre Galerie</h2>
@@ -155,29 +326,29 @@ export default function Home() {
           
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             <div className="relative h-64 overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-shadow">
-              <img src="/hero-bg.jpg" alt="Intérieur Dal Nonno" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
+              <img src="/dal-nonno-vitrine.jpeg" alt="Vitrine Dal Nonno" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
             </div>
             <div className="relative h-64 overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-shadow">
-              <img src="/coffee-specialty.jpg" alt="Café pistache" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
+              <img src="/dal-nonno-latte-pistache.jpeg" alt="Latte pistache" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
             </div>
             <div className="relative h-64 overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-shadow">
-              <img src="/pastries.jpg" alt="Vitrine" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
+              <img src="/dal-nonno-affogato.jpeg" alt="Affogato" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
             </div>
             <div className="relative h-64 overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-shadow">
-              <img src="/cafe-ambiance.jpg" alt="Ambiance" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
+              <img src="/dal-nonno-logo-cups.jpeg" alt="Logo et gobelets" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
             </div>
             <div className="relative h-64 overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-shadow">
-              <img src="/hero-bg.jpg" alt="Comptoir" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
+              <img src="/dal-nonno-interieur.jpeg" alt="Intérieur" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
             </div>
             <div className="relative h-64 overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-shadow">
-              <img src="/coffee-specialty.jpg" alt="Spécialités" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
+              <img src="/dal-nonno-vitrine.jpeg" alt="Produits" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
             </div>
           </div>
         </div>
       </section>
 
       {/* Contact & Localisation */}
-      <section id="contact" className="py-20 bg-background">
+      <section id="contact" className="py-20 bg-card">
         <div className="container">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4 text-primary">Nous Trouver</h2>
@@ -273,6 +444,7 @@ export default function Home() {
                 <a href="#accueil" className="block text-muted-foreground hover:text-primary transition-colors">Accueil</a>
                 <a href="#a-propos" className="block text-muted-foreground hover:text-primary transition-colors">À propos</a>
                 <a href="#specialites" className="block text-muted-foreground hover:text-primary transition-colors">Nos spécialités</a>
+                <a href="#menu" className="block text-muted-foreground hover:text-primary transition-colors">Menu & Prix</a>
                 <a href="#galerie" className="block text-muted-foreground hover:text-primary transition-colors">Galerie</a>
                 <a href="#contact" className="block text-muted-foreground hover:text-primary transition-colors">Contact</a>
               </div>

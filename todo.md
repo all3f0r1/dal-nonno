@@ -14,3 +14,8 @@
 - [x] Créer le logo personnalisé Dal Nonno
 - [x] Générer sitemap.xml et robots.txt pour le SEO
 - [x] Optimiser pour mobile (responsive design)
+
+## Nouvelles demandes
+
+- [x] Remplacer les images générées par les vraies photos de Google Maps
+- [x] Ajouter une section Menu avec liste de prix
