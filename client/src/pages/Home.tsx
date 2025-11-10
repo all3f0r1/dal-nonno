@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { APP_LOGO } from "@/const";
-import { Coffee, MapPin, Phone, Clock, Instagram, Facebook, UtensilsCrossed } from "lucide-react";
+import { Coffee, MapPin, Phone, Clock, UtensilsCrossed } from "lucide-react";
 
 export default function Home() {
   return (
@@ -396,17 +396,7 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="pt-4 border-t border-border">
-                    <h3 className="font-bold text-lg mb-3 text-card-foreground">Suivez-nous</h3>
-                    <div className="flex gap-4">
-                      <Button variant="outline" size="icon" className="hover:bg-primary hover:text-primary-foreground">
-                        <Instagram className="h-5 w-5" />
-                      </Button>
-                      <Button variant="outline" size="icon" className="hover:bg-primary hover:text-primary-foreground">
-                        <Facebook className="h-5 w-5" />
-                      </Button>
-                    </div>
-                  </div>
+
                 </div>
               </Card>
             </div>

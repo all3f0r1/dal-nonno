@@ -19,3 +19,9 @@
 
 - [x] Remplacer les images générées par les vraies photos de Google Maps
 - [x] Ajouter une section Menu avec liste de prix
+
+## Déploiement
+
+- [ ] Ajouter le lien Instagram réel
+- [ ] Pousser le code sur le repo GitHub
+- [ ] Déployer sur Vercel
