@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dal-nonno-website.manus.space/sitemap.xml
