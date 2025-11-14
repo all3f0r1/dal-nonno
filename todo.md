@@ -31,4 +31,4 @@
 - [x] Installer GSAP et les plugins nécessaires
 - [x] Ajouter des effets parallax sur les sections
 - [x] Ajouter des animations au scroll avec GSAP ScrollTrigger
-- [ ] Pousser les modifications sur GitHub
+- [x] Pousser les modifications sur GitHub
