@@ -32,3 +32,10 @@
 - [x] Ajouter des effets parallax sur les sections
 - [x] Ajouter des animations au scroll avec GSAP ScrollTrigger
 - [x] Pousser les modifications sur GitHub
+
+## Menu burger responsive
+
+- [x] Créer le composant menu burger avec animation GSAP
+- [x] Intégrer le menu burger dans la navigation
+- [x] Tester sur mobile
+- [ ] Pousser sur GitHub

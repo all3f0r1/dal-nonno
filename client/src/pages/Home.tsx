@@ -1,20 +1,63 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { APP_LOGO } from "@/const";
-import { Coffee, MapPin, Phone, Clock, UtensilsCrossed } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { Coffee, MapPin, Phone, Clock, UtensilsCrossed, Menu, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const mobileMenuOverlayRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
   const specialtiesRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const galleryRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
+
+  // Mobile menu animation
+  useEffect(() => {
+    if (mobileMenuRef.current && mobileMenuOverlayRef.current) {
+      if (isMobileMenuOpen) {
+        // Open animation
+        gsap.to(mobileMenuOverlayRef.current, {
+          opacity: 1,
+          duration: 0.3,
+          display: 'block'
+        });
+        gsap.to(mobileMenuRef.current, {
+          x: 0,
+          duration: 0.4,
+          ease: "power3.out"
+        });
+        // Stagger menu items
+        gsap.from(mobileMenuRef.current.querySelectorAll('.mobile-menu-item'), {
+          opacity: 0,
+          x: -50,
+          duration: 0.3,
+          stagger: 0.1,
+          delay: 0.2
+        });
+      } else {
+        // Close animation
+        gsap.to(mobileMenuRef.current, {
+          x: '-100%',
+          duration: 0.4,
+          ease: "power3.in"
+        });
+        gsap.to(mobileMenuOverlayRef.current, {
+          opacity: 0,
+          duration: 0.3,
+          display: 'none',
+          delay: 0.1
+        });
+      }
+    }
+  }, [isMobileMenuOpen]);
 
   useEffect(() => {
     // Hero parallax effect
@@ -133,12 +176,98 @@ export default function Home() {
     };
   }, []);
 
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <div className="min-h-screen">
+      {/* Mobile Menu Overlay */}
+      <div
+        ref={mobileMenuOverlayRef}
+        className="fixed inset-0 bg-black/50 z-40 hidden"
+        onClick={closeMobileMenu}
+      />
+
+      {/* Mobile Menu */}
+      <div
+        ref={mobileMenuRef}
+        className="fixed top-0 left-0 h-full w-80 max-w-[85vw] bg-card border-r border-border z-50 -translate-x-full shadow-2xl"
+      >
+        <div className="flex items-center justify-between p-4 border-b border-border">
+          <img src={APP_LOGO} alt="Dal Nonno" className="h-12 w-auto" />
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={closeMobileMenu}
+            className="hover:bg-accent"
+          >
+            <X className="h-6 w-6" />
+          </Button>
+        </div>
+        <nav className="flex flex-col p-6 space-y-4">
+          <a
+            href="#accueil"
+            className="mobile-menu-item text-lg font-medium hover:text-primary transition-colors py-2"
+            onClick={closeMobileMenu}
+          >
+            Accueil
+          </a>
+          <a
+            href="#a-propos"
+            className="mobile-menu-item text-lg font-medium hover:text-primary transition-colors py-2"
+            onClick={closeMobileMenu}
+          >
+            À propos
+          </a>
+          <a
+            href="#specialites"
+            className="mobile-menu-item text-lg font-medium hover:text-primary transition-colors py-2"
+            onClick={closeMobileMenu}
+          >
+            Nos spécialités
+          </a>
+          <a
+            href="#menu"
+            className="mobile-menu-item text-lg font-medium hover:text-primary transition-colors py-2"
+            onClick={closeMobileMenu}
+          >
+            Menu & Prix
+          </a>
+          <a
+            href="#galerie"
+            className="mobile-menu-item text-lg font-medium hover:text-primary transition-colors py-2"
+            onClick={closeMobileMenu}
+          >
+            Galerie
+          </a>
+          <a
+            href="#contact"
+            className="mobile-menu-item text-lg font-medium hover:text-primary transition-colors py-2"
+            onClick={closeMobileMenu}
+          >
+            Contact
+          </a>
+          <div className="pt-4 border-t border-border">
+            <Button asChild className="w-full">
+              <a href="tel:+32496769721">Appelez-nous</a>
+            </Button>
+          </div>
+        </nav>
+      </div>
+
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-background/95 backdrop-blur-sm border-b border-border z-50">
         <div className="container flex items-center justify-between h-16">
           <div className="flex items-center gap-3">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden"
+              onClick={() => setIsMobileMenuOpen(true)}
+            >
+              <Menu className="h-6 w-6" />
+            </Button>
             <img src={APP_LOGO} alt="Dal Nonno" className="h-12 w-auto" />
           </div>
           <div className="hidden md:flex items-center gap-6">
@@ -149,7 +278,7 @@ export default function Home() {
             <a href="#galerie" className="text-sm font-medium hover:text-primary transition-colors">Galerie</a>
             <a href="#contact" className="text-sm font-medium hover:text-primary transition-colors">Contact</a>
           </div>
-          <Button asChild>
+          <Button asChild className="hidden md:inline-flex">
             <a href="tel:+32496769721">Appelez-nous</a>
           </Button>
         </div>
