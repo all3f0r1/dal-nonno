@@ -25,3 +25,10 @@
 - [ ] Ajouter le lien Instagram réel
 - [ ] Pousser le code sur le repo GitHub
 - [ ] Déployer sur Vercel
+
+## Animations et effets
+
+- [x] Installer GSAP et les plugins nécessaires
+- [x] Ajouter des effets parallax sur les sections
+- [x] Ajouter des animations au scroll avec GSAP ScrollTrigger
+- [ ] Pousser les modifications sur GitHub
