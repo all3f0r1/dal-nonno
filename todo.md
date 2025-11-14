@@ -38,4 +38,4 @@
 - [x] Créer le composant menu burger avec animation GSAP
 - [x] Intégrer le menu burger dans la navigation
 - [x] Tester sur mobile
-- [ ] Pousser sur GitHub
+- [x] Pousser sur GitHub
