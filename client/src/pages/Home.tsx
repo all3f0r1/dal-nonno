@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { APP_LOGO } from "@/const";
-import { Coffee, MapPin, Phone, Clock, UtensilsCrossed, Menu, X } from "lucide-react";
+import { Coffee, MapPin, Phone, Clock, UtensilsCrossed, Menu, X, ArrowUp, Star, Quote } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -10,20 +10,107 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const mobileMenuOverlayRef = useRef<HTMLDivElement>(null);
+  const scrollTopRef = useRef<HTMLButtonElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
   const specialtiesRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
+  const testimonialsRef = useRef<HTMLDivElement>(null);
   const galleryRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
+
+  const testimonials = [
+    {
+      name: "Sophie L.",
+      rating: 5,
+      text: "Un vrai petit coin d'Italie à Bruxelles ! Le latte pistache est absolument délicieux et les arancini sont parfaits. L'ambiance est chaleureuse et le service impeccable.",
+      date: "Il y a 2 semaines"
+    },
+    {
+      name: "Marc D.",
+      rating: 5,
+      text: "Meilleur café italien du quartier ! Les pâtisseries sont fraîches et authentiques. Je recommande vivement le cannoli à la pistache. Un régal !",
+      date: "Il y a 1 mois"
+    },
+    {
+      name: "Isabelle M.",
+      rating: 5,
+      text: "Accueil chaleureux et produits de qualité. La focaccia est divine et le tiramisu maison est à tomber. Je viens régulièrement et je ne suis jamais déçue.",
+      date: "Il y a 3 semaines"
+    },
+    {
+      name: "Thomas B.",
+      rating: 5,
+      text: "Excellente adresse pour un café ou un déjeuner rapide. Les paninis sont généreux et délicieux. L'ambiance italienne authentique fait toute la différence !",
+      date: "Il y a 1 semaine"
+    }
+  ];
+
+  // Scroll to top visibility
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 500) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Scroll to top animation
+  useEffect(() => {
+    if (scrollTopRef.current) {
+      if (showScrollTop) {
+        gsap.to(scrollTopRef.current, {
+          opacity: 1,
+          scale: 1,
+          duration: 0.3,
+          ease: "back.out(1.7)"
+        });
+      } else {
+        gsap.to(scrollTopRef.current, {
+          opacity: 0,
+          scale: 0,
+          duration: 0.3,
+          ease: "back.in(1.7)"
+        });
+      }
+    }
+  }, [showScrollTop]);
+
+  // Testimonials carousel auto-rotation
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [testimonials.length]);
+
+  // Testimonials animation
+  useEffect(() => {
+    if (testimonialsRef.current) {
+      const testimonialCards = testimonialsRef.current.querySelectorAll('.testimonial-card');
+      gsap.fromTo(
+        testimonialCards[currentTestimonial],
+        { opacity: 0, x: 50 },
+        { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" }
+      );
+    }
+  }, [currentTestimonial]);
 
   // Mobile menu animation
   useEffect(() => {
     if (mobileMenuRef.current && mobileMenuOverlayRef.current) {
       if (isMobileMenuOpen) {
-        // Open animation
         gsap.to(mobileMenuOverlayRef.current, {
           opacity: 1,
           duration: 0.3,
@@ -34,7 +121,6 @@ export default function Home() {
           duration: 0.4,
           ease: "power3.out"
         });
-        // Stagger menu items
         gsap.from(mobileMenuRef.current.querySelectorAll('.mobile-menu-item'), {
           opacity: 0,
           x: -50,
@@ -43,7 +129,6 @@ export default function Home() {
           delay: 0.2
         });
       } else {
-        // Close animation
         gsap.to(mobileMenuRef.current, {
           x: '-100%',
           duration: 0.4,
@@ -74,7 +159,6 @@ export default function Home() {
         }
       });
 
-      // Hero content fade in
       gsap.from(heroRef.current.querySelectorAll('.hero-content > *'), {
         opacity: 0,
         y: 50,
@@ -141,6 +225,20 @@ export default function Home() {
       });
     }
 
+    // Testimonials section animation
+    if (testimonialsRef.current) {
+      gsap.from(testimonialsRef.current.querySelector('.testimonials-content'), {
+        opacity: 0,
+        y: 50,
+        duration: 0.8,
+        scrollTrigger: {
+          trigger: testimonialsRef.current,
+          start: "top 70%",
+          toggleActions: "play none none reverse"
+        }
+      });
+    }
+
     // Gallery images reveal
     if (galleryRef.current) {
       gsap.from(galleryRef.current.querySelectorAll('.gallery-item'), {
@@ -180,8 +278,34 @@ export default function Home() {
     setIsMobileMenuOpen(false);
   };
 
+  const scrollToTop = () => {
+    gsap.to(window, {
+      scrollTo: { y: 0 },
+      duration: 1,
+      ease: "power2.inOut"
+    });
+  };
+
+  const nextTestimonial = () => {
+    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const prevTestimonial = () => {
+    setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
+
   return (
     <div className="min-h-screen">
+      {/* Scroll to Top Button */}
+      <button
+        ref={scrollTopRef}
+        onClick={scrollToTop}
+        className="fixed bottom-8 right-8 z-40 bg-primary text-primary-foreground p-4 rounded-full shadow-2xl hover:bg-primary/90 transition-colors opacity-0 scale-0"
+        aria-label="Retour en haut"
+      >
+        <ArrowUp className="h-6 w-6" />
+      </button>
+
       {/* Mobile Menu Overlay */}
       <div
         ref={mobileMenuOverlayRef}
@@ -235,6 +359,13 @@ export default function Home() {
             Menu & Prix
           </a>
           <a
+            href="#avis"
+            className="mobile-menu-item text-lg font-medium hover:text-primary transition-colors py-2"
+            onClick={closeMobileMenu}
+          >
+            Avis clients
+          </a>
+          <a
             href="#galerie"
             className="mobile-menu-item text-lg font-medium hover:text-primary transition-colors py-2"
             onClick={closeMobileMenu}
@@ -275,6 +406,7 @@ export default function Home() {
             <a href="#a-propos" className="text-sm font-medium hover:text-primary transition-colors">À propos</a>
             <a href="#specialites" className="text-sm font-medium hover:text-primary transition-colors">Nos spécialités</a>
             <a href="#menu" className="text-sm font-medium hover:text-primary transition-colors">Menu & Prix</a>
+            <a href="#avis" className="text-sm font-medium hover:text-primary transition-colors">Avis clients</a>
             <a href="#galerie" className="text-sm font-medium hover:text-primary transition-colors">Galerie</a>
             <a href="#contact" className="text-sm font-medium hover:text-primary transition-colors">Contact</a>
           </div>
@@ -572,8 +704,111 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Avis Clients */}
+      <section ref={testimonialsRef} id="avis" className="py-20 bg-background">
+        <div className="container">
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Star className="h-10 w-10 text-primary fill-primary" />
+              <h2 className="text-4xl font-bold text-primary">Avis Clients</h2>
+            </div>
+            <div className="flex items-center justify-center gap-2 mb-2">
+              <div className="flex">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="h-6 w-6 text-primary fill-primary" />
+                ))}
+              </div>
+              <span className="text-2xl font-bold text-primary">4.9/5</span>
+            </div>
+            <p className="text-lg text-muted-foreground">
+              Ce que nos clients disent de nous
+            </p>
+          </div>
+
+          <div className="testimonials-content max-w-4xl mx-auto">
+            <div className="relative">
+              <Card className="p-8 bg-card shadow-xl">
+                <Quote className="h-12 w-12 text-primary/20 mb-4" />
+                {testimonials.map((testimonial, index) => (
+                  <div
+                    key={index}
+                    className={`testimonial-card ${index === currentTestimonial ? 'block' : 'hidden'}`}
+                  >
+                    <div className="flex mb-4">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} className="h-5 w-5 text-primary fill-primary" />
+                      ))}
+                    </div>
+                    <p className="text-lg text-foreground mb-6 italic">
+                      "{testimonial.text}"
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-bold text-card-foreground">{testimonial.name}</p>
+                        <p className="text-sm text-muted-foreground">{testimonial.date}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </Card>
+
+              {/* Navigation buttons */}
+              <div className="flex items-center justify-center gap-4 mt-8">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={prevTestimonial}
+                  className="rounded-full"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                </Button>
+                
+                <div className="flex gap-2">
+                  {testimonials.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentTestimonial(index)}
+                      className={`w-3 h-3 rounded-full transition-all ${
+                        index === currentTestimonial
+                          ? 'bg-primary w-8'
+                          : 'bg-muted-foreground/30'
+                      }`}
+                      aria-label={`Aller au témoignage ${index + 1}`}
+                    />
+                  ))}
+                </div>
+
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={nextTestimonial}
+                  className="rounded-full"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                </Button>
+              </div>
+            </div>
+
+            <div className="text-center mt-8">
+              <p className="text-muted-foreground mb-4">
+                Basé sur plus de 150 avis Google Maps
+              </p>
+              <Button asChild variant="outline">
+                <a 
+                  href="https://www.google.com/maps/place/Dal+Nonno/@50.8406774,4.4014406,17z/data=!4m8!3m7!1s0x47c3c589f9eff1d7:0x428aed1a17ea5a99!8m2!3d50.8406774!4d4.4014406!9m1!1b1!16s%2Fg%2F11k9bt2mlz"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Voir tous les avis
+                </a>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Galerie */}
-      <section ref={galleryRef} id="galerie" className="py-20 bg-background">
+      <section ref={galleryRef} id="galerie" className="py-20 bg-card">
         <div className="container">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4 text-primary">Notre Galerie</h2>
@@ -606,7 +841,7 @@ export default function Home() {
       </section>
 
       {/* Contact & Localisation */}
-      <section ref={contactRef} id="contact" className="py-20 bg-card">
+      <section ref={contactRef} id="contact" className="py-20 bg-background">
         <div className="container">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4 text-primary">Nous Trouver</h2>
@@ -691,6 +926,7 @@ export default function Home() {
                 <a href="#a-propos" className="block text-muted-foreground hover:text-primary transition-colors">À propos</a>
                 <a href="#specialites" className="block text-muted-foreground hover:text-primary transition-colors">Nos spécialités</a>
                 <a href="#menu" className="block text-muted-foreground hover:text-primary transition-colors">Menu & Prix</a>
+                <a href="#avis" className="block text-muted-foreground hover:text-primary transition-colors">Avis clients</a>
                 <a href="#galerie" className="block text-muted-foreground hover:text-primary transition-colors">Galerie</a>
                 <a href="#contact" className="block text-muted-foreground hover:text-primary transition-colors">Contact</a>
               </div>

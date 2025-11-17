@@ -39,3 +39,9 @@
 - [x] Intégrer le menu burger dans la navigation
 - [x] Tester sur mobile
 - [x] Pousser sur GitHub
+
+## Nouvelles fonctionnalités
+
+- [x] Créer une section Avis clients avec carousel animé
+- [x] Ajouter un bouton Scroll to top avec animation GSAP
+- [ ] Pousser sur GitHub
